@@ -14,8 +14,8 @@ export const proyectos = [
       "PyBullet",
       "Robotics"
     ],
-    demo: "#",
-    codigo: "https://github.com/tejasms03/quadruped-rl",
+    demo: "https://github.com/tejasms03/TUM_ri/blob/main/hexapod-movement-project.mp4",
+    codigo: "https://github.com/tejasms03/TUM_ri",
   },
   {
     titulo: "MuJoCo Robotic Arm Simulation (UR10e)",
@@ -26,7 +26,7 @@ export const proyectos = [
       "Robotics Simulation",
       "Control Systems"
     ],
-    demo: "#",
+    demo: "https://github.com/tejasms03/mujoco_arm/tree/main/outputs",
     codigo: "https://github.com/tejasms03/mujoco_arm",
   },
   {
@@ -38,7 +38,7 @@ export const proyectos = [
       "Localization",
       "Optimization"
     ],
-    demo: "#",
+    demo: "https://github.com/tejasms03/mapper/blob/main/mapper_demo.mov",
     codigo: "https://github.com/tejasms03/mapper",
   },
   {
@@ -50,7 +50,7 @@ export const proyectos = [
       "Data Fusion",
       "Research"
     ],
-    demo: "https://ieeexplore.ieee.org",
-    codigo: "#",
+    demo: "https://github.com/tejasms03/drone_swarm/tree/main/demo",
+    codigo: "https://github.com/tejasms03/drone_swarm",
   },
 ];
