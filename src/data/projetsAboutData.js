@@ -1,4 +1,4 @@
-import quadruped from "../assets/img-projects/quadruped.png";
+import quadruped from "../assets/img-projects/quadruped.gif";
 import mujocoArm from "../assets/img-projects/mujoco-arm.gif";
 import mapper from "../assets/img-projects/mapper.gif";
 import droneSwarm from "../assets/img-projects/drone-swarm.gif";
