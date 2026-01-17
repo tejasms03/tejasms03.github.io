@@ -1,0 +1,174 @@
+---
+import "../styles/projects.css";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/commons/hero/hero.astro";
+import ProjectCard from "../components/project/proyectCard.astro";
+import Banner from "../components/commons/banners/banner.astro";
+import { proyectos } from "../data/projectData.js";
+---
+
+<Layout title="Projects" description="Projects">
+  <Hero titulo="Projects" />
+
+  <!-- Botones -->
+  <div class="mt-6 mb-6 flex flex-wrap justify-center gap-3 px-2">
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="all">
+      All
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="software">
+      Software
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="mechanical">
+      Mechanical Design
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="reinforcement">
+      Reinforcement Learning
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="embedded">
+      Embedded
+    </button>
+  </div>
+
+  <!-- Cards -->
+  <div
+    id="projects-container"
+    class="4xl:px-96 flex flex-wrap justify-center gap-5 px-3 pt-5 xl:px-32 2xl:px-60"
+  >
+    {
+      proyectos.map((proyecto, index) => (
+        <ProjectCard
+          index={index}
+          titulo={proyecto.titulo}
+          descripcion={proyecto.descripcion}
+          imagen={proyecto.imagen}
+          tecnologias={proyecto.tecnologias}
+          demo={proyecto.demo}
+          codigo={proyecto.codigo}
+          categoria={proyecto.categoria}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Ver más -->
+  <div class="flex justify-center mt-8">
+    <button
+      id="load-more"
+      class="px-6 py-2 cursor-pointer bg-[#69c7c7] text-[#1d1250] font-bold rounded-full hover:bg-[#46caca] drop-shadow-[2px_2px_0_#7836cf] active:translate-y-0.5 active:drop-shadow-none transition-all"
+    >
+      view more
+    </button>
+  </div>
+
+  <Banner />
+</Layout>
+
+<script is:inline>
+(function () {
+  const VISIBLE = "project-visible";
+  const HIDDEN = "project-hidden";
+  const INITIAL_VISIBLE = 12;
+  const HIDE_DELAY = 300;
+
+  let itemsToShow = INITIAL_VISIBLE;
+  let activeFilters = new Set(["all"]);
+
+  let cards = [];
+  let buttons = [];
+  let loadMoreBtn;
+
+  function initElements() {
+    cards = [...document.querySelectorAll("[data-index]")];
+    buttons = [...document.querySelectorAll(".filter-btn")];
+    loadMoreBtn = document.getElementById("load-more");
+  }
+
+  function show(card) {
+    card.style.display = "flex";
+    requestAnimationFrame(() => {
+      card.classList.remove(HIDDEN);
+      card.classList.add(VISIBLE);
+    });
+  }
+
+  function hide(card) {
+    card.classList.remove(VISIBLE);
+    card.classList.add(HIDDEN);
+    setTimeout(() => {
+      if (card.classList.contains(HIDDEN)) {
+        card.style.display = "none";
+      }
+    }, HIDE_DELAY);
+  }
+
+  function updateButtons() {
+    buttons.forEach((btn) => {
+      btn.classList.toggle(
+        "active",
+        activeFilters.has(btn.dataset.filter)
+      );
+    });
+  }
+
+  function applyFilter() {
+    const filtered = cards.filter((card) => {
+      const cats = (card.dataset.categoria || "")
+        .toLowerCase()
+        .split(",");
+
+      if (activeFilters.has("all")) return true;
+      return cats.some((c) => activeFilters.has(c));
+    });
+
+    cards.forEach(hide);
+    filtered.slice(0, itemsToShow).forEach(show);
+
+    loadMoreBtn.style.display =
+      filtered.length > itemsToShow ? "block" : "none";
+  }
+
+  function attachFilters() {
+    buttons.forEach((btn) => {
+      btn.onclick = () => {
+        const f = btn.dataset.filter;
+        itemsToShow = INITIAL_VISIBLE;
+
+        if (f === "all") {
+          activeFilters.clear();
+          activeFilters.add("all");
+        } else {
+          activeFilters.delete("all");
+          activeFilters.has(f)
+            ? activeFilters.delete(f)
+            : activeFilters.add(f);
+
+          if (activeFilters.size === 0) {
+            activeFilters.add("all");
+          }
+        }
+
+        updateButtons();
+        applyFilter();
+      };
+    });
+  }
+
+  function attachLoadMore() {
+    loadMoreBtn.onclick = () => {
+      itemsToShow += INITIAL_VISIBLE;
+      applyFilter();
+    };
+  }
+
+  function init() {
+    initElements();
+    attachFilters();
+    attachLoadMore();
+    updateButtons();
+    applyFilter();
+  }
+
+  document.addEventListener("astro:page-load", init);
+  window.addEventListener("load", init);
+})();
+</script>

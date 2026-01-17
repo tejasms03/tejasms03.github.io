@@ -1,0 +1,54 @@
+---
+import ServiceCard from "./ServiceCard.astro";
+import { FaLaptopCode, FaBolt, FaRocket } from "react-icons/fa"; 
+import {
+  FaProjectDiagram,
+  FaBrain,
+  FaMicrochip,
+  FaFlask,
+} from "react-icons/fa";
+
+---
+
+<section class="site-container mt-14 mx-auto max-w-6xl px-4">
+	<h2
+		class="text-4xl font-bold flex flex-col items-center gap-6 text-center whitespace-nowrap text-white md:flex-row md:items-center md:text-end"
+	>
+		<span class="hidden h-1.5 grow rounded-lg drop-shadow-[2px_2px_0_#0debd8] bg-[#7836cf] md:block"></span>
+		<span class="drop-shadow-[2px_2px_0_#7836cf]">Services</span>
+	</h2>
+
+	<div class="mt-10 grid gap-6 md:grid-cols-3">
+		<ServiceCard
+  icon={FaLaptopCode}
+  title="Robotics Software Development"
+  description="Design and implementation of intelligent robotic systems, including motion planning, control algorithms, and real-world deployment."
+/>
+
+<ServiceCard
+  icon={FaProjectDiagram}
+  title="Simulation & Modeling"
+  description="Development of physics-based simulations for robotic systems to test, validate, and transfer algorithms from simulation to real environments."
+/>
+
+<ServiceCard
+  icon={FaBrain}
+  title="Autonomous Systems & AI"
+  description="Application of reinforcement learning, computer vision, and data-driven methods to enable autonomous behavior in robots and multi-agent systems."
+/>
+
+<ServiceCard
+  icon={FaMicrochip}
+  title="Embedded Systems Integration"
+  description="Integration of sensors, actuators, and embedded hardware with reliable software for real-time control and system stability."
+/>
+
+<ServiceCard
+  icon={FaFlask}
+  title="Research & Prototyping"
+  description="End-to-end research and prototyping, from algorithm design and simulations to experimental validation and performance evaluation."
+/>
+
+
+	</div>
+</section>
