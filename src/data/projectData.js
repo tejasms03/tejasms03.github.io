@@ -12,7 +12,7 @@ export const proyectos = [
   {
     titulo: "Quadruped and Hexapod Robot Locomotion using Reinforcement Learning",
     descripcion:
-      "Quadruped robot design and control using reinforcement learning with sim-to-real transfer via PyBullet and ROS2.",
+      "This project focuses on the design, simulation, and control of quadruped and hexapod robots using reinforcement learning techniques. The robots are trained in PyBullet to learn stable and efficient locomotion behaviors, with an emphasis on sim-to-real transfer using ROS2. The workflow integrates mechanical design in Fusion 360, physics-based simulation, and learned control policies, demonstrating robust walking and adaptability across different terrains and robot morphologies."
     imagen: quadruped.src,
     tecnologias: ["Python", "Reinforcement Learning", "ROS2", "PyBullet", "Fusion 360"],
     demo: "https://github.com/tejasms03/TUM_ri/blob/main/hexapod-movement-project.mp4",
