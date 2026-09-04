@@ -18,7 +18,7 @@ export const proyectos = [
     imagen: spheroSwarm.src,
     tecnologias: ["Python", "Reinforcement Learning", "Swarm Robotics", "Sim-to-Real", "Computer Vision", "BLE"],
     demo: "#",
-    codigo: "#",
+    codigo: "https://github.com/tejasms03/spheroswarm",
     categoria: ["reinforcement", "multiagent", "software"],
   },
   {

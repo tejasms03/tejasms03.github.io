@@ -14,6 +14,12 @@ export interface Props {
 
 const { titulo, descripcion, imagen, tecnologias, demo, codigo, categoria, index } =
   Astro.props;
+
+// A card may have no demo or no public repo yet; render nothing rather than a
+// link to "#".
+const isLink = (href?: string) => Boolean(href) && href !== "#";
+const hasDemo = isLink(demo);
+const hasCodigo = isLink(codigo);
 ---
 
 <div
@@ -42,31 +48,39 @@ const { titulo, descripcion, imagen, tecnologias, demo, codigo, categoria, index
     <p class="flex grow text-gray-400">{descripcion}</p>
 
     <div class="mt-auto flex justify-between">
-      <a
-        class="group text-primary mt-6 flex items-center justify-start p-0 font-bold text-lg"
-        target="_blank"
-        rel="noopener noreferrer"
-        href={demo}
-      >
-        Demo
-        <HiArrowRight
-          className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
-          size={18}
-        />
-      </a>
+      {
+        hasDemo && (
+          <a
+            class="group text-primary mt-6 flex items-center justify-start p-0 font-bold text-lg"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={demo}
+          >
+            Demo
+            <HiArrowRight
+              className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
+              size={18}
+            />
+          </a>
+        )
+      }
 
-      <a
-        class="group text-primary mt-6 flex items-center justify-start p-0 font-bold text-lg"
-        href={codigo}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Code
-        <HiArrowRight
-          className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
-          size={18}
-        />
-      </a>
+      {
+        hasCodigo && (
+          <a
+            class="group text-primary mt-6 ml-auto flex items-center justify-start p-0 font-bold text-lg"
+            href={codigo}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Code
+            <HiArrowRight
+              className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
+              size={18}
+            />
+          </a>
+        )
+      }
     </div>
   </div>
 </div>
