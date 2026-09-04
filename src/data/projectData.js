@@ -1,4 +1,4 @@
-import spheroSwarm from "../assets/img-projects/sphero-swarm.png";
+import spheroSwarm from "../assets/img-projects/sphero-swarm.gif";
 import ukfMaze from "../assets/img-projects/ukf-maze.gif";
 import motionBridge from "../assets/img-projects/motionbridge.gif";
 import guidePlay from "../assets/img-projects/guideplay.gif";
